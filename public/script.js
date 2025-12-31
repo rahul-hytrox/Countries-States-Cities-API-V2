@@ -10,7 +10,9 @@ let selectedStateData = {};
 let selectedCityData = {};
 
 // API Base URL (assuming running on same host)
-const API_BASE = 'http://localhost:3000/api';
+const hostUrl = window.location.origin;
+const API_BASE = `${hostUrl}/api`;
+// const API_BASE = 'http://localhost:3000/api';
 
 // --- Initialization ---
 window.addEventListener('DOMContentLoaded', () => {
