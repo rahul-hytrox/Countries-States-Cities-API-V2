@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geo Listing App</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for premium look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>🌍 Geo Location Selector</h1>
+            <p>Select your location to see details</p>
+        </header>
+
+        <div class="selector-card">
+            <div class="form-group">
+                <label for="country">Country</label>
+                <select id="country">
+                    <option value="" selected disabled>Select Country</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="state">State</label>
+                <select id="state" disabled>
+                    <option value="" selected disabled>Select State</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="city">City</label>
+                <select id="city" disabled>
+                    <option value="" selected disabled>Select City</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="result-card" class="result-card hidden">
+            <h2>📍 Location Details</h2>
+            <div class="details-grid">
+
+                <div class="detail-group">
+                    <h3>Country Details</h3>
+                    <p><strong>Name:</strong> <span id="res-country-name">-</span></p>
+                    <p><strong>Capital:</strong> <span id="res-country-capital">-</span></p>
+                    <p><strong>Currency:</strong> <span id="res-country-currency">-</span></p>
+                    <p><strong>Phone Code:</strong> <span id="res-country-phone">-</span></p>
+                </div>
+
+                <div class="detail-group">
+                    <h3>State Details</h3>
+                    <p><strong>Name:</strong> <span id="res-state-name">-</span></p>
+                    <p><strong>Code:</strong> <span id="res-state-code">-</span></p>
+                </div>
+
+                <div class="detail-group">
+                    <h3>City Details</h3>
+                    <p><strong>Name:</strong> <span id="res-city-name">-</span></p>
+                    <p><strong>Latitude:</strong> <span id="res-city-lat">-</span></p>
+                    <p><strong>Longitude:</strong> <span id="res-city-lng">-</span></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
