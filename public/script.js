@@ -49,6 +49,7 @@ countrySelect.addEventListener('change', async (e) => {
             resetSelect(citySelect, 'Select City');
             citySelect.disabled = true;
             resultCard.classList.add('hidden');
+            document.querySelector('.google-map-section').classList.remove('active');
 
             // 3. Fetch States
             fetchStates(data.iso2); // Requirement says "country_code" for state api? -> API is /states/country/:iso2
@@ -78,6 +79,7 @@ stateSelect.addEventListener('change', async (e) => {
     // 2. Enable City
     resetSelect(citySelect, 'Select City');
     resultCard.classList.add('hidden');
+    document.querySelector('.google-map-section').classList.remove('active');
 
     // 3. Fetch Cities
     if (selectedCountryData.iso2 && stateCode) {
@@ -203,7 +205,41 @@ function renderDetails() {
     document.getElementById('res-city-name').textContent = selectedCityData.name;
     document.getElementById('res-city-lat').textContent = selectedCityData.latitude;
     document.getElementById('res-city-lng').textContent = selectedCityData.longitude;
-
+    initMap(selectedCityData.latitude, selectedCityData.longitude);
     // Show Card
     resultCard.classList.remove('hidden');
 }
+
+// Map instance
+let map = null;
+
+function initMap(lat, lng) { //google map
+    const mapSection = document.querySelector('.google-map-section');
+    mapSection.classList.add('active');
+
+    // If map is already initialized, just update view and marker
+    if (map) {
+        map.setView([lat, lng], 13);
+        // Clear existing markers
+        map.eachLayer((layer) => {
+            if (layer instanceof L.Marker) {
+                map.removeLayer(layer);
+            }
+        });
+        L.marker([lat, lng]).addTo(map);
+    } else {
+        // Initialize map
+        map = L.map('google-map').setView([lat, lng], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+        L.marker([lat, lng]).addTo(map);
+    }
+
+    // Invalidate size to ensure it renders correctly after becoming visible
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 100);
+}
+
